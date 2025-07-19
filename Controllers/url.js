@@ -10,7 +10,8 @@ export const ShortUrl=async (req,res)=>{
     const shortCode=shortid.generate();
 
 //local domain
-    const _url=process.env.local_url;
+    // const _url=process.env.local_url;
+    const _url="https://url-shortener-56ym.onrender.com"
 
     const ShortUrl=`${_url}/${shortCode}`
 
@@ -26,7 +27,7 @@ export const ShortUrl=async (req,res)=>{
 
 }
 
-export const getOriginalUrl=async (req,res)=>{
+/*export const getOriginalUrl=async (req,res)=>{
     const shortCode=req.params.long;
 
     //find the url in db
@@ -38,3 +39,17 @@ export const getOriginalUrl=async (req,res)=>{
 
     res.redirect(originalUrl.longUrl);
 }
+*/
+export const getOriginalUrl = async (req, res) => {
+    const shortCode = req.params.long;
+    console.log("🔍 Requested shortcode:", shortCode);
+
+    const originalUrl = await Url.findOne({ shortCode });
+    console.log("📦 Found in DB:", originalUrl);
+
+    if (!originalUrl) {
+        return res.status(404).send(" URL not found");
+    }
+
+    res.redirect(originalUrl.longUrl);
+};

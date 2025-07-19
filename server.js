@@ -4,7 +4,10 @@ import mongoose from "./db.js";
 import { ShortUrl,getOriginalUrl } from "./Controllers/url.js";
 import path, { join } from 'path';
 
-app.use(express.static(join(process.cwd(),'views')))
+app.set('view engine', 'ejs');
+
+app.use(express.static('public'));
+
 
 app.use(express.urlencoded({extended:true}))
 
