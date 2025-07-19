@@ -6,15 +6,19 @@ try {
     .connect(
       process.env.mongo_url,
       {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        ssl: true,
+        tlsAllowInvalidCertificates: false,
+      },
+      {
         dbName: "NodeJs_Learning",
       }
     )
     .then(() => {
       console.log("Connected to MongoDb..");
     });
-} 
-
-catch (error) {
+} catch (error) {
   console.error("Error connecting to MongoDB:", error);
 }
 

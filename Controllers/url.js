@@ -9,6 +9,7 @@ export const ShortUrl=async (req,res)=>{
     const longUrl=req.body.longUrl;
     const shortCode=shortid.generate();
 
+//local domain
     const _url=process.env.local_url;
 
     const ShortUrl=`${_url}/${shortCode}`
